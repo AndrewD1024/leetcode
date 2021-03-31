@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number[]} nums1
+         * @param {number[]} nums2
+         * @return {number}
+         */
+        // 基本思路：暴力法：
+        // 用两个指针i，j分别指向数组a和数组b初始位置；比较a[i]和b[j]的大小，如果a[i]<=b[j]：push(a[i]),i++;
+        // 如果a[i]<b[j]:push(b[j]), j++;知道指针i，j指向a和b 尾部
+        // 特殊情况：a多余或者b多余，则直接把多余数组的尾部连接到新排序数组后
+        var findMedianSortedArrays = function (nums1, nums2) {
+
+            // 构造新数组，为排序后的两数组merge
+            let newArr = [];
+            let i = 0, j = 0; // 两个指针指向两数组头部
+            while (i < nums1.length && j < nums2.length) { // i移动到数组a尾部或j移动到数组b尾部
+                if (nums1[i] <= nums2[j]) {
+                    newArr.push(nums1[i]);
+                    i++;
+                } else {
+                    newArr.push(nums2[j]);
+                    j++;
+                }
+            }
+            // a剩余长度
+            while (i < nums1.length) {
+                newArr.push(nums1[i]);
+                i++;
+            }
+            // b剩余长度
+            while (j < nums2.length) {
+                newArr.push(nums2[j]);
+                j++;
+            }
+
+            // console.log(newArr);
+            // 获取中位数
+            const len = newArr.length;
+            if (len % 2 == 0) { //新数组长度为偶数，取中间两位
+                index_1 = len / 2;
+                index_2 = len / 2 - 1;
+                // console.log(len, index_1, index_2);
+                return (newArr[index_1] + newArr[index_2]) / 2;
+            } else { // 奇数，取中间一位
+                return (newArr[Math.floor(len / 2)]);
+            }
+        };
+        nums1 = [0, 1, 8], nums2 = [2, 4];
+        console.log(findMedianSortedArrays(nums1, nums2));
+    </script>
+</body>
+
+</html>

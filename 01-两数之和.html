@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两数之和</title>
+</head>
+
+<body>
+    <script>
+
+        // 1. 暴力求解
+        // var twoSum = function (nums, target) {
+        //     var indices = new Array([2]);
+        //     for (var i = 0; i < nums.length; i++) {
+        //         for (var j = i + 1; j < nums.length; j++) {
+        //             if (nums[j] + nums[i] == target) {
+        //                 indices[0] = i;
+        //                 indices[1] = j;
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     return indices;
+        // }
+
+        // 2. HashMap 空间换时间
+        var twoSum = function (nums, target) {
+            const map = new Map();
+            // 由于第一个元素在它之前一定没有元素与之匹配，所以先存入哈希表
+            map.set(nums[0], 0);
+            for (let i = 1; i < nums.length; i++) {
+                // 减完的值
+                other = target - nums[i];
+                // 如果表中找到余数的索引，返回其与当前i
+                if (map.get(other) != undefined) {
+                    return [map.get(other), i];
+                }
+                // 数值和索引存入Hash
+                map.set(nums[i], i);
+            }
+        }
+
+        var nums = [2, 7, 11, 15];
+        var target = 9;
+        var arr = twoSum(nums, target);
+        console.log(arr);
+
+    </script>
+</body>
+
+</html>

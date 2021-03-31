@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两数相加</title>
+</head>
+
+<body>
+    <script>
+        /**
+            * Definition for singly-linked list.
+            * function ListNode(val, next) {
+            * this.val = (val===undefined ? 0 : val)
+            * this.next = (next===undefined ? null : next)
+            * }
+            */
+        /**
+        * @param {ListNode} l1
+        * @param {ListNode} l2
+        * @return {ListNode}
+        */
+
+        //Definition for singly-linked list.
+        function ListNode(val, next) {
+            this.val = (val === undefined ? 0 : val)
+            this.next = (next === undefined ? null : next)
+        }
+
+        var addTwoNumbers = function (l1, l2) {
+            let head = null, tail = null; // 头尾节点
+            let carry = 0; //进位
+            while (l1 || l2) {
+                let n1 = l1 ? l1.val : 0;
+                let n2 = l2 ? l2.val : 0;
+                const sum = n1 + n2 + carry;
+                if (!head) { // 初始时头节点与尾节点相同，创建新节点并将头尾均指向它
+                    head = tail = new ListNode(sum % 10);
+                } else { // 新建节点，尾指向它
+                    tail.next = new ListNode(sum % 10);
+                    tail = tail.next;
+                }
+                carry = Math.floor(sum / 10);
+                // console.log(sum / 10);
+                // l1 或 l2 节点多
+                if (l1) l1 = l1.next;
+                if (l2) l2 = l2.next;
+            }
+            // 最后一位有进位
+            if (carry > 0) {
+                tail.next = new ListNode(carry);
+            }
+            return head;
+        };
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最长子串长度</title>
+</head>
+
+<body>
+    <script>
+        var lengthOfLongestSubstring = function (s) {
+            // 滑动窗口初始化为一个空数组
+            let arr = [];
+            // 记录最大长度
+            let max = 0;
+            // 遍历字符串
+            for (let i = 0; i < s.length; i++) {
+                // 使用indexOf 判断是否在数组中出现过
+                let index = arr.indexOf(s[i]);
+                if (index != -1) { // 数组中有当前字符
+                    // 删除数组中当前字符及之前的所有字符
+                    arr.splice(0, index + 1);
+                }
+                // 在窗口右边放入新的字符
+                arr.push(s.charAt(i));
+                // 更新最大值
+                max = Math.max(arr.length, max);
+            }
+            return max;
+        };
+        // 作者：chu - peng - fei
+        // 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-jian-dan-yi-dong-de-javascript/
+        // 来源：力扣（LeetCode）
+        // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        // 测试 "abcabcbb" "bbbbb" "pwwkew" ""
+        var str = "";
+        maxLength = lengthOfLongestSubstring(str);
+        console.log(maxLength);
+    </script>
+</body>
+
+</html>
